@@ -44,3 +44,4 @@ TRUNCATE student;
 
 # DROP Table
 DROP TABLE student;
+
