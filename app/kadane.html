@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadane's Algorithm | DSA Learning Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="arrays.html" class="back-link">← Arrays</a>
+            <h2>Kadane's Algorithm</h2>
+            <p>Maximum Sum Subarray Problem</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="content-section">
+            <h2>1. What is Kadane's Algorithm?</h2>
+
+            <p>
+                Kadane's Algorithm is used to find the maximum sum of a
+                contiguous subarray within a given array of integers.
+            </p>
+
+            <p>
+                Instead of checking every possible subarray, it keeps track
+                of the current subarray sum and the maximum sum found so far.
+            </p>
+
+            <div class="example-box">
+                <h3>Example</h3>
+                <p>Input:</p>
+                <pre>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</pre>
+
+                <p>Maximum Sum: <strong>6</strong></p>
+                <p>Subarray: <strong>[4, -1, 2, 1]</strong></p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2>2. How does it work?</h2>
+
+            <p>We maintain two variables:</p>
+
+            <ul>
+                <li><strong>currentSum:</strong> Maximum subarray sum ending at the current position.</li>
+                <li><strong>maxSum:</strong> Maximum subarray sum found so far.</li>
+            </ul>
+
+            <p>For every element, we decide whether to:</p>
+
+            <ul>
+                <li>Start a new subarray from the current element.</li>
+                <li>Extend the previous subarray by adding the current element.</li>
+            </ul>
+
+            <p>The key formula is:</p>
+
+            <pre>currentSum = Math.max(num, currentSum + num);
+maxSum = Math.max(maxSum, currentSum);</pre>
+        </section>
+
+        <!-- <section class="content-section">
+            <h2>3. Dry Run</h2>
+
+            <p>Input array:</p>
+            <pre>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</pre>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Current Sum</th>
+                            <th>Max Sum</th>
+                            <th>Decision</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>-2</td>
+                            <td>-2</td>
+                            <td>-2</td>
+                            <td>Start</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Restart</td>
+                        </tr>
+                        <tr>
+                            <td>-3</td>
+                            <td>-2</td>
+                            <td>1</td>
+                            <td>Extend</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>Restart</td>
+                        </tr>
+                        <tr>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>Extend</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>Extend</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>6</td>
+                            <td>6</td>
+                            <td>Extend</td>
+                        </tr>
+                        <tr>
+                            <td>-5</td>
+                            <td>1</td>
+                            <td>6</td>
+                            <td>Extend</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>Extend</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>The final maximum subarray sum is <strong>6</strong>.</p>
+        </section>
+
+        <section class="content-section">
+            <h2>4. Complexity Analysis</h2>
+
+            <ul>
+                <li><strong>Time Complexity:</strong> O(n) — We traverse the array once.</li>
+                <li><strong>Space Complexity:</strong> O(1) — We use only two variables.</li>
+            </ul>
+        </section> -->
+
+        <section class="content-section">
+            <h2>3. Practice Problems</h2>
+
+            <p>Expand each problem to view its solution and run the code.</p>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 1: Maximum Subarray Sum</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an integer array, find the maximum possible sum
+                        of a contiguous subarray.
+                    </p>
+
+                    <label for="code1">JavaScript Solution</label>
+
+                    <textarea id="code1" class="code-editor" spellcheck="false">function maxSubArray(nums) {
+    let currentSum = nums[0];
+    let maxSum = nums[0];
+
+    for (let i = 1; i < nums.length; i++) {
+        currentSum = Math.max(nums[i], currentSum + nums[i]);
+        maxSum = Math.max(maxSum, currentSum);
+    }
+
+    return maxSum;
+}
+
+console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));</textarea>
+
+                    <button class="run-button" data-editor="code1" data-output="output1">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output1">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 2: Return the Maximum Sum Subarray</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Modify Kadane's Algorithm to return both the maximum
+                        sum and the starting and ending indices of the subarray.
+                    </p>
+
+                    <label for="code2">JavaScript Solution</label>
+
+                    <textarea id="code2" class="code-editor" spellcheck="false">function maxSubarraySum(arr) {
+
+    let currentSum = arr[0];
+    let maxSum = arr[0];
+
+    let start = 0;
+    let end = 0;
+    let tempStart = 0;
+
+    for (let i = 1; i < arr.length; i++) {
+
+        if (arr[i] > currentSum + arr[i]) {
+            currentSum = arr[i];
+            tempStart = i;
+        } else {
+            currentSum += arr[i];
+        }
+
+        if (currentSum > maxSum) {
+            maxSum = currentSum;
+            start = tempStart;
+            end = i;
+        }
+    }
+
+    console.log("Max Sum:", maxSum);
+    console.log("Sub Array:", arr.slice(start, end + 1));
+
+    return maxSum;
+}
+
+maxSubarraySum(
+    [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+);
+
+/**
+ * Time: O(n)
+ * Space: O(1)
+ */</textarea>
+
+                    <button class="run-button" data-editor="code2" data-output="output2">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output2">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 3: Maximum Circular Subarray Sum</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an integer array representing a circular sequence, find the maximum possible sum of a
+                        non-empty contiguous subarray.
+                    </p>
+                    <p></p>
+                    A circular array means that the last element is connected to the first element. Therefore, a
+                    subarray can wrap around the end of the array and continue from the beginning.
+                    </p>
+
+                    <label for="code3">JavaScript Solution</label>
+
+                    <textarea id="code3" class="code-editor" spellcheck="false">/**
+Maximum Circular Subarray Sum:
+    Input: [1 2 3 -2 5]
+    Output: 11
+    [5,1,2,3]
+*/
+
+
+function maxCirucularSubArrSum(arr) {
+    function kadane(a){
+        let currentSum = a[0];
+        let maxSum = a[0];
+
+        for(let i=1; i<a.length; i++){
+        currentSum = Math.max(a[i], currentSum + a[i]);
+        maxSum = Math.max(currentSum, maxSum);
+    }
+
+    return maxSum;
+    }
+
+    let arrMax = kadane(arr);
+
+    // All elements are negative
+    if (arrMax < 0) return arrMax;
+
+    let invArrMax = kadane(arr.map(e => -e));
+    let sum = arr.reduce((acc, num) => acc + num, 0);
+    return Math.max(arrMax, (sum + invArrMax))
+}
+
+console.log(
+    maxCirucularSubArrSum(
+   [1, 2, 3, -2, 5]
+)
+);
+
+
+/**
+    Time: O(n)
+    Space: O(1)
+*/</textarea>
+
+                    <button class="run-button" data-editor="code3" data-output="output3">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output3">Click Run Code to execute.</pre>
+                    </div>
+                    <div class="example-box">
+                        <h3>🍕 Real-World Example: Circular Pizza</h3>
+
+                        <p>
+                            Imagine a circular pizza cut into 5 slices. Each slice
+                            has a profit or loss value. Your goal is to select
+                            consecutive slices that give you the maximum profit.
+                        </p>
+
+                        <pre>
+Slices:  A   B   C   D   E
+Values:  1   2   3  -2   5
+</pre>
+
+                        <p><strong>Normal Subarray:</strong></p>
+                        <pre>
+A → B → C 
+1 + 2 + 3 = 6
+</pre>
+
+                        <p><strong>Circular Subarray:</strong></p>
+                        <pre>
+E → A → B → C
+5 + 1 + 2 + 3 = 11
+</pre>
+
+                        <p>
+                            Since the pizza is circular, we can wrap around from
+                            the last slice to the first slice.
+                        </p>
+
+                        <p><strong>How does our approach find 11?</strong></p>
+
+
+                        <pre>Total Sum = 9
+Minimum Subarray = [-2]
+
+Negated Array:
+[-1, -2, -3, 2, -5]
+
+invArrMax = 2 
+
+Circular Max = Total Sum + invArrMax
+= 9 - (-2)
+= 11</pre>
+
+                        <p>
+                            💡 <strong>Remember:</strong> Instead of finding the
+                            best circular portion directly, find the worst
+                            portion to exclude. The remaining elements form
+                            the maximum circular subarray.
+                        </p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 4: Maximum Product Subarray</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an integer array, find the maximum product of a non-empty contiguous subarray.
+                    </p>
+                    <p>
+                        A subarray consists of consecutive elements from the original array. Your goal is to find the
+                        subarray whose multiplication produces the largest possible product.
+                    </p>
+
+                    <label for="code2">JavaScript Solution</label>
+
+                    <textarea id="code4" class="code-editor" spellcheck="false">/**
+Maximum Circular Subarray Product:
+    Input: -2 3 -4
+    Output: 24
+    -2 × 3 × -4 = 24.
+*/
+
+
+function maxSubArrMultiply(arr) {
+    let maxProduct = arr[0];
+    let minProduct = arr[0];
+    let result = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        let num = arr[i];
+
+        if (num < 0) {
+            [maxProduct, minProduct] = [minProduct, maxProduct];
+        }
+
+        maxProduct = Math.max(num, maxProduct * num);
+        minProduct = Math.min(num, minProduct * num);
+
+        result = Math.max(result, maxProduct);
+    }
+
+    return result;
+}
+
+console.log(
+    maxSubArrMultiply(
+        [-2,3,-4]
+    )
+);
+
+
+/**
+    Time: O(n)
+    Space: O(1)
+ */</textarea>
+
+                    <button class="run-button" data-editor="code4" data-output="output4">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output4">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+        <section class="content-section">
+            <h2>4. References & Further Reading</h2>
+
+            <p>
+                Explore these resources to understand Kadane's Algorithm
+            </p>
+
+            <div class="reference-list">
+
+                <a href="https://medium.com/@whyamit101/kadanes-algorithm-practice-problems-33df3cc3d6f6" target="_blank"
+                    rel="noopener noreferrer" class="reference-card">
+                    <div>
+                        <h3>Kadane’s Algorithm Practice Problems - Medium.com</h3>
+                        <!-- <p>Understand the problem, its history, and different approaches.</p> -->
+                    </div>
+                    <span>↗</span>
+                </a>
+
+            </div>
+        </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+        <p>DSA Learning Hub</p>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
