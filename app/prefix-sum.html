@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prefix Sum | DSA Learning Hub</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+    </head>
+
+    <body>
+
+        <header class="site-header">
+            <div class="container">
+                <a href="arrays.html" class="back-link">← Arrays</a>
+                <h2>Prefix Sum</h2>
+                <p>Precompute cumulative totals of an array</p>
+            </div>
+        </header>
+
+        <main class="container">
+
+            <section class="content-section">
+                <h2>1. What is Prefix Sum?</h2>
+
+                <p>
+                    Prefix Sum is a technique where we create an additional array that stores the cumulative sum of elements from the beginning of the original array.
+                </p>
+
+                <p>
+                    In simple terms, each position stores the sum of all elements before it, including itself.
+                </p>
+
+                <div class="example-box">
+                    <h3>Example</h3>
+                    <p>Input:</p>
+                    <pre>arr = [2, 4, 1, 5, 3]</pre>
+                    
+                    <p>output : <strong>[2, 6, 7, 12, 15]</strong></p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>2. How does it work?</h2>
+
+                <pre>prefix[0] = 2
+
+prefix[1] = 2 + 4 = 6
+
+prefix[2] = 2 + 4 + 1 = 7
+
+prefix[3] = 2 + 4 + 1 + 5 = 12
+
+prefix[4] = 2 + 4 + 1 + 5 + 3 = 15</pre>
+            </section>
+
+
+            <section class="content-section">
+                <h2>3. Why is Prefix Sum useful?</h2>
+
+                <p>
+                    Imagine you have an array:
+                </p>
+
+                <pre>arr = [2, 4, 1, 5, 3]</pre>
+
+                <p>
+                    You need to calculate the sum between index 1 and index 3.
+                </p>
+
+                <div class="example-box">
+                    <h3>Without Prefix Sum:</h3>
+                    <pre>4 + 1 + 5 = 10</pre>                    
+                </div>
+
+                <div class="example-box">
+                    <h3>With Prefix Sum:</h3>
+                    <pre>prefix = [2, 6, 7, 12, 15]
+Range Sum(L,R)=prefix[R]-prefix[L-1]
+For indices 1 to 3:
+        12 - 2 = 10</pre>    
+                                    
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>4. Practice Problems</h2>
+
+                <p>Expand each problem to view its solution and run the code.</p>
+
+                <div class="problem">
+                    <button class="problem-toggle">
+                        <span>Problem 1: Range Sum Query</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+
+                    <div class="problem-content">
+                        <p>
+                            Given an array and two indices left and right, return the sum of elements between those indices (inclusive).
+                        </p>
+
+                        <label for="code1">JavaScript Solution</label>
+
+                        <textarea id="code1" class="code-editor" spellcheck="false">/**
+    const arr = [3, 2, 4, 5, 1, 6];
+
+    const left = 2;
+    const right = 4;
+    Expected output: 10
+    Explanation: 4 + 5 + 1 = 10
+*/
+function rangeSumQuery(arr, left, right){
+    let prefixSumArr = [];
+    prefixSumArr[0] = arr[0];
+
+    for(let i=1; i<arr.length; i++){
+        prefixSumArr[i] = prefixSumArr[i-1] + arr[i];
+    }
+
+    let result;
+
+    if (left === 0) {
+        result = prefixSumArr[right];
+    } else {
+        result = prefixSumArr[right] - prefixSumArr[left - 1];
+    }
+
+    return result;
+}
+console.log(
+    rangeSumQuery(
+    [3, 2, 4, 5, 1, 6],0,4
+    )
+);
+
+/**
+ * Time: O(n)
+ * Space: O(n)
+ */</textarea>
+
+                        <button class="run-button" data-editor="code1" data-output="output1">
+                            Run Code
+                        </button>
+
+                        <div class="output-box">
+                            <strong>Output</strong>
+                            <pre id="output1">Click Run Code to execute.</pre>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="problem">
+                    <button class="problem-toggle">
+                        <span>Problem 2: Multiple Range Sum Queries</span>
+                        <span class="toggle-icon">+</span>
+                    </button>
+
+                    <div class="problem-content">
+                        <p>
+                            You are given an integer array and multiple queries. Each query contains two indices left and right.
+
+                            Return the sum of elements between those indices (inclusive) for every query.
+                        </p>
+
+                        <label for="code2">JavaScript Solution</label>
+
+                        <textarea id="code2" class="code-editor" spellcheck="false">function multipleRangeSum(arr, queries) {
+    let prefixSumArr = [];
+    prefixSumArr[0] = arr[0];
+
+    for(let i=1; i<arr.length;i++){
+        prefixSumArr[i] = prefixSumArr[i-1] + arr[i];
+    }
+
+    for(let j=0; j<queries.length; j++){
+        let left = queries[j][0];
+        let right = queries[j][1];
+
+        if(left == 0){
+            console.log(prefixSumArr[right]);
+        } else{
+            console.log(prefixSumArr[right] - prefixSumArr[left-1]);
+        }
+    }
+
+}
+
+multipleRangeSum(
+    [2, 4, 1, 5, 3, 6],
+    [
+        [0, 2],
+        [1, 4],
+        [2, 5],
+        [0, 5]
+    ]
+);
+/**
+ * Time: O(n+m)
+ * Space: O(n)
+ */</textarea>
+
+                        <button class="run-button" data-editor="code2" data-output="output2">
+                            Run Code
+                        </button>
+
+                        <div class="output-box">
+                            <strong>Output</strong>
+                            <pre id="output2">Click Run Code to execute.</pre>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="content-section">
+                <h2>5. References & Further Reading</h2>
+
+                <p>
+                    Explore these resources
+                </p>
+
+                <div class="reference-list">
+
+                    <a href="https://akd3257.medium.com/understanding-the-concept-of-prefix-sum-array-70fb333169a4"
+                        target="_blank" rel="noopener noreferrer" class="reference-card">
+                        <div>
+                            <h3>Understanding the Concept of Prefix Sum Array - Medium.com</h3>
+                            <!-- <p>Understand the problem, its history, and different approaches.</p> -->
+                        </div>
+                        <span>↗</span>
+                    </a>
+
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="site-footer">
+            <p>DSA Learning Hub</p>
+        </footer>
+
+        <script src="assets/js/app.js"></script>
+    </body>
+
+</html>
