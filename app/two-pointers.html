@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Pointers | DSA Learning Hub</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="arrays.html" class="back-link">← Arrays</a>
+            <h2>Two Pointers</h2>
+            <p>Finding Pairs & Subarrays in a Sorted Array</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="content-section">
+            <h2>1. What is Two Pointers?</h2>
+
+            <p>
+                The Two Pointers technique is an algorithmic approach that uses two variables (pointers) to track positions in an array. Each pointer moves through the array according to specific conditions to solve a problem efficiently.
+            </p>
+
+            <p>
+                The important idea is that we use the positions of two elements to make progress toward a solution, rather than repeatedly checking every possible pair.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2>2. When can we use Two Pointers?</h2>
+
+            <p>Two Pointers is especially useful in these situations:</p>
+    
+            <div class="example-box">
+                <h3>Pattern 1:</h3>
+                <p>
+                    <p>
+                        <b>
+                            Pointers moving toward each other
+                        </b>
+                    </p>
+                    <p>
+                        Typical starting positions: left = 0, right = arr.length - 1.
+                    </p>
+                    <p>
+                        Use when comparing elements from opposite ends or searching pairs in a sorted array.
+                    </p>
+                    <p>
+                        <b>
+                            Examples: two-sum in a sorted array, palindrome checks, reversing an array.
+                        </b>
+                    </p>
+                </p>                    
+            </div>
+
+            <div class="example-box">
+                <h3>Pattern 2:</h3>
+                <p>
+                    <p>
+                        <b>
+                            Both pointers move forward
+                        </b>
+                    </p>
+                    <p>
+                        Typical starting positions: read = 0, write = 0.
+                    </p>
+                    <p>
+                        Use when scanning an array and modifying it in-place, or when processing elements at different speeds.
+                    </p>
+                    <p>
+                        <b>
+                            Examples: remove duplicates from a sorted array, move zeros to the end, merge sorted arrays.
+                        </b>
+                    </p>
+                </p>                    
+            </div>
+
+            <div class="example-box">
+                <h3>Pattern 3:</h3>
+                <p>
+                    <p>
+                        <b>
+                            Fast and slow pointers
+                        </b>
+                    </p>
+                    <p>
+                        Both pointers move forward but at different rates or according to different conditions.
+                    </p>
+                    <p>
+                        <b>
+                            Examples: detecting cycles in linked lists, finding certain positions in sequences, and some in-place array problems.
+                        </b>
+                    </p>
+                </p>                    
+            </div>
+
+        </section>
+
+        <section class="content-section">
+            <h2>3. Practice Problems</h2>
+
+            <p>Expand each problem to view its solution and run the code.</p>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 1: Reverse an Array</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an array of elements, reverse the order of its elements without using an additional array.
+                    </p>
+
+                    <label for="code1">JavaScript Solution</label>
+
+                    <textarea id="code1" class="code-editor" spellcheck="false">// Reverse an Array
+let arr = [10, 20, 30, 40, 50];
+function reverseArray(arr){
+    let left = 0;
+    let right = arr.length - 1;
+
+
+    while(left < right){
+        let temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+        left++;
+        right--;
+    }
+    return arr;
+}
+/*
+    Time: O(n/2) => O(n)
+    Space: O(1)
+*/
+console.log(reverseArray(arr))
+</textarea>
+
+                    <button class="run-button" data-editor="code1" data-output="output1">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output1">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 2:  Check if an Array Is a Palindrome</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an array of elements, determine whether the array is a palindrome.
+                        <br>
+                        An array is considered a palindrome if it reads the same from left to right and right to left. In other words, the elements at corresponding positions from both ends must be equal.
+                        <br>
+                        Use the Two Pointers technique to compare elements starting from both ends and move towards the center.
+                    </p>
+
+                    <label for="code2">JavaScript Solution</label>
+
+                    <textarea id="code2" class="code-editor" spellcheck="false">// Check if an Array Is a Palindrome
+function isPalindrome(arr){
+    let left = 0;
+    let right = arr.length - 1;
+    let flag = true;
+    while(left < right){
+        if(arr[left] != arr[right]){
+            flag = false;
+            break;
+        }
+        left++;
+        right--;
+    }   
+    return flag;
+}
+
+console.log(
+    isPalindrome([10, 20, 30, 40, 50])
+);
+
+
+/**
+    Time: O(n/2) => O(n)
+    Space: O(1)
+*/
+</textarea>
+
+                    <button class="run-button" data-editor="code2" data-output="output2">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output2">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 3: Two Sum in a Sorted Array </span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given a sorted array of integers and a target value, determine whether there exists a pair of elements whose sum equals the target.
+                        <br>
+                        Use the Two Pointers technique to find the pair efficiently without using nested loops or additional data structures.
+                    </p>
+                    <p>
+
+                    <label for="code3">JavaScript Solution</label>
+
+                    <textarea id="code3" class="code-editor" spellcheck="false">// Two Sum in a Sorted Array
+function hasPair(arr, n){
+    let left = 0;
+    let right = arr.length - 1;
+    while(left < right){
+        let sum = arr[left] + arr[right];
+        if(sum == n){
+            return true;
+        } else if(sum < n){
+            left++;
+        } else{
+            right--;
+        }
+    }
+    return false;
+}
+
+console.log(
+    hasPair(
+        [1, 2, 4, 6, 8, 9], 10
+    )
+);
+/**
+    Time: O(n)
+    Space: O(1)
+*/
+</textarea>
+
+                    <button class="run-button" data-editor="code3" data-output="output3">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output3">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 4: Move Zeros to the End</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given an array of integers, move all zeros to the end of the array while maintaining the relative order of the non-zero elements.
+                    </p>
+
+                    <label for="code2">JavaScript Solution</label>
+
+                    <textarea id="code4" class="code-editor" spellcheck="false">// Move Zeros to the End
+arr =   [0, 0, 1]
+function moveZeros(arr) {
+    let currentIndex = 0;
+    let insertPos = 0;
+    while(currentIndex < arr.length){
+        if(arr[currentIndex] !== 0){
+            let temp = arr[currentIndex];
+            arr[currentIndex] = arr[insertPos];
+            arr[insertPos] = temp;
+            insertPos++;
+        }
+        currentIndex++;
+    }
+    return arr;
+}
+console.log(
+    moveZeros(
+        [0, 1, 0, 3, 12]
+    )
+);
+/**
+    Time: O(n)
+    Space: O(1)
+*/
+</textarea>
+
+                    <button class="run-button" data-editor="code4" data-output="output4">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output4">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 5: Remove Duplicates from a Sorted Array </span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given a sorted array of integers, remove the duplicate elements in-place so that each unique element appears only once.
+                        <br>
+                        The relative order of the unique elements must be maintained. Since the operation must be performed in-place, do not use an additional array.
+                    </p>
+
+                    <label for="code5">JavaScript Solution</label>
+
+                    <textarea id="code5" class="code-editor" spellcheck="false">// Remove Duplicates from a Sorted Array
+let arr = [0, 0, 1, 1, 1, 2, 2, 3];
+function removeDuplicates(arr) {
+    let currentIndex = 1;
+    let insertPos = 1;
+    while(currentIndex < arr.length){
+        if(arr[currentIndex] == arr[insertPos - 1]){
+            currentIndex++;
+        } else{
+            arr[insertPos] = arr[currentIndex];
+            insertPos++;
+            currentIndex++;
+        }
+    }
+    console.log(arr.slice(0, insertPos));
+    return insertPos;
+}
+
+console.log(
+    removeDuplicates(arr)
+);
+/**
+    Time: O(n)
+    Space: O(1)
+*/</textarea>
+
+                    <button class="run-button" data-editor="code5" data-output="output5">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output5">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 6: Merge Two Sorted Arrays</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given two sorted arrays of integers, merge them into a single sorted array.
+                        <br>
+                        The resulting array must contain all elements from both input arrays in ascending order, including duplicate elements.    
+                    </p>
+
+                    <label for="code6">JavaScript Solution</label>
+
+                    <textarea id="code6" class="code-editor" spellcheck="false">// Merge Two Sorted Arrays
+arr1 = [1, 3, 5, 7];
+arr2 = [2, 4, 6, 8];
+function mergeSortedArrays(arr1, arr2) {
+    let i = 0;
+    let j = 0;
+    result = [];
+    while(i < arr1.length && j < arr2.length){
+        if(arr1[i] < arr2[j]){
+            result.push(arr1[i]);
+            i++;
+        } else{
+            result.push(arr2[j]);
+            j++;
+        }
+    }
+    while(i < arr1.length){
+        result.push(arr1[i]);
+        i++;
+    }
+    while(j < arr2.length){
+        result.push(arr2[j]);
+        j++;
+    }
+    return result;
+}
+console.log(
+    mergeSortedArrays(arr1, arr2)
+);
+/**
+    Time: O(n + m)
+    Space: O(n + m)
+*/</textarea>
+
+                    <button class="run-button" data-editor="code6" data-output="output6">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output6">Click Run Code to execute.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 7: Trapping Rain Water</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+                    </p>
+
+                    <div class="example-box">
+                        <pre>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6</pre>
+                    </div>
+                    <label for="code6">JavaScript Solution</label>
+
+                    <textarea id="code7" class="code-editor" spellcheck="false">function trap(height) {
+    let left = 0;
+    let right = height.length - 1;
+
+    let leftMax = 0;
+    let rightMax = 0;
+
+    let water = 0;
+
+    while (left <= right) {
+
+        if (height[left] <= height[right]) {
+
+            if (height[left] >= leftMax) {
+                leftMax = height[left];
+            } else {
+                water += leftMax - height[left];
+            }
+
+            left++;
+
+        } else {
+
+            if (height[right] >= rightMax) {
+                rightMax = height[right];
+            } else {
+                water += rightMax - height[right];
+            }
+
+            right--;
+        }
+    }
+
+    return water;
+}
+console.log(
+    trap([0,1,0,2,1,0,1,3,2,1,2,1])
+);
+</textarea>
+
+                    <button class="run-button" data-editor="code7" data-output="output7">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output7">Click Run Code to execute.</pre>
+                    </div>
+
+                    <div class="example-box">
+                        <h3>🌧️ Real-World Example: Water Trapped Between Buildings</h3>
+
+                        <p>
+                            Imagine a row of buildings with different heights. After heavy rainfall,
+                            water gets trapped between the taller buildings. Each building's height
+                            is represented by an array element. Your goal is to calculate how much
+                            water is trapped.
+                        </p>
+
+                        <pre>
+Buildings:  A   B   C   D   E   F
+Heights:    3   0   2   0   4   1
+</pre>
+
+                        <p><strong>How is water trapped?</strong></p>
+
+                        <pre>
+Left Maximum  = 3
+Right Maximum = 4
+
+Water Level = min(3, 4) = 3
+
+Water Trapped = 3 - Current Height
+              = 3 - 0
+              = 3 units
+</pre>
+
+                        <p><strong>Water trapped at each position:</strong></p>
+
+                        <pre>
+Position:  A   B   C   D   E   F
+Height:    3   0   2   0   4   1
+Water:     0   3   1   3   0   0
+
+Total Water = 3 + 1 + 3 = 7 units
+</pre>
+
+                        <p><strong>How does our Two Pointers approach find the answer?</strong></p>
+
+                        <pre>
+Initialize:
+
+left = 0
+right = arr.length - 1
+
+leftMax = 0
+rightMax = 0
+
+water = 0
+</pre>
+
+                        <p>
+                            Start with two pointers, one at the beginning and another at the end
+                            of the array.
+                        </p>
+
+                        <pre>
+Heights: [3, 0, 2, 0, 4, 1]
+          ↑              ↑
+         left           right
+</pre>
+
+                        <p>
+                            Compare the heights at both pointers. If the left height is smaller
+                            than or equal to the right height, process the left side.
+                            Otherwise, process the right side.
+                        </p>
+
+                        <p><strong>Step 1: Process the left side</strong></p>
+
+                        <pre>
+height[left] = 3
+
+leftMax = 3
+
+Move left pointer forward.
+</pre>
+
+                        <p><strong>Step 2: Calculate trapped water</strong></p>
+
+                        <pre>
+Current Height = 0
+leftMax = 3
+
+Water = leftMax - Current Height
+      = 3 - 0
+      = 3 units
+</pre>
+
+                        <p><strong>Step 3: Continue moving the pointers</strong></p>
+
+                        <pre>
+At height 2:
+
+Water = 3 - 2 = 1
+
+At height 0:
+
+Water = 3 - 0 = 3
+</pre>
+
+                        <p><strong>Final Calculation:</strong></p>
+
+                        <pre>
+Total Water = 3 + 1 + 3
+
+Output = 7 units
+</pre>
+
+                        <p>
+                            💡 <strong>Remember:</strong> Instead of calculating the maximum
+                            height on both sides for every element separately, maintain
+                            leftMax and rightMax while moving two pointers inward.
+
+                            Always process the side with the smaller current boundary because
+                            that side determines the water level we can safely calculate.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+        <section class="content-section">
+            <h2>4. References & Further Practice</h2>
+
+            <p>
+                Explore these resources to understand Two Pointers
+            </p>
+
+            <div class="reference-list">
+
+                <a href="https://chatgpt.com/s/w_6adcde2875208191b8e9d3f790d9c4f2" target="_blank"
+                    rel="noopener noreferrer" class="reference-card">
+                    <div>
+                        <h3>Chatgpt quiz</h3>
+                    </div>
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+            <div class="reference-list">
+
+                <a href="https://medium.com/@akshelar.18119/dsa-the-two-pointer-approach-a53fd50bf666" target="_blank"
+                    rel="noopener noreferrer" class="reference-card">
+                    <div>
+                        <h3>The Two Pointer Approach: Medium.com</h3>
+                    </div>
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+            <div class="reference-list">
+
+                <a href="https://leetcode.com/problems/trapping-rain-water/description/" target="_blank"
+                    rel="noopener noreferrer" class="reference-card">
+                    <div>
+                        <h3>Trapping Rain Water: leetcode</h3>
+                    </div>
+                    <span>↗</span>
+                </a>
+
+            </div>
+           
+        </section>
+
+
+    </main>
+
+    <footer class="site-footer">
+        <p>DSA Learning Hub</p>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
