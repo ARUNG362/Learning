@@ -620,6 +620,210 @@ Output = 7 units
                 </div>
             </div>
 
+            <div class="problem">
+                <button class="problem-toggle">
+                    <span>Problem 8: Container With Most Water</span>
+                    <span class="toggle-icon">+</span>
+                </button>
+
+                <div class="problem-content">
+                    <p>
+                        You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+                        <br>
+                        Find two lines that together with the x-axis form a container, such that the container contains the most water.
+                        <br>
+                        Return the maximum amount of water a container can store.
+                    </p>
+
+                    <div class="example-box">
+                        <pre>Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49</pre>
+                    </div>
+                    <label for="code8">JavaScript Solution</label>
+
+                    <textarea id="code8" class="code-editor" spellcheck="false">function maxContainerArea(height) {
+    let left = 0;
+    let right = height.length - 1;
+    let maxArea = 0;
+
+    while(left < right){
+        let width = right - left;
+
+        let area = Math.min(height[left], height[right]) * width;
+
+        maxArea = Math.max(area, maxArea);
+
+        if(height[left] < height[right]){
+            left += 1;
+        } else{
+            right -= 1;
+        }
+    }
+
+    return maxArea;
+};
+console.log(
+    maxContainerArea([1,8,6,2,5,4,8,3,7])
+);
+</textarea>
+
+                    <button class="run-button" data-editor="code8" data-output="output8">
+                        Run Code
+                    </button>
+
+                    <div class="output-box">
+                        <strong>Output</strong>
+                        <pre id="output8">Click Run Code to execute.</pre>
+                    </div>
+
+
+                    <div class="example-box">
+
+                        <h3>🌊 1. Understand the Problem</h3>
+
+                        <p>
+                            We have vertical lines with different heights.
+                            We need to select two lines that can hold the maximum amount of water.
+                        </p>
+
+                        <pre>
+height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+
+Our goal: Find the maximum container area.</pre>
+
+
+                        <h3>💡 2. Formula</h3>
+
+                        <pre>
+Width = right - left
+
+Height = min(height[left], height[right])
+
+Area = Width × Height</pre>
+
+                        <p>
+                            We use the smaller height because water cannot go above
+                            the shorter wall.
+                        </p>
+
+
+                        <h3>🎯 3. Two Pointers Approach</h3>
+
+                        <p>
+                            Start one pointer at the beginning and another at the end.
+                        </p>
+
+                        <pre>
+left = 0
+right = height.length - 1
+
+maxArea = 0</pre>
+
+                        <p>Follow these three steps:</p>
+
+                        <pre>
+1. Calculate the area.
+
+2. Update maxArea.
+
+3. Move the pointer with the smaller height.</pre>
+
+
+                        <h3>🧠 4. Why Move the Smaller Height?</h3>
+
+                        <p>
+                            The shorter wall limits how much water the container can hold.
+                        </p>
+
+                        <pre>
+Left Height  = 1
+Right Height = 7
+
+Width = 8
+
+Area = 8 × 1 = 8</pre>
+
+                        <p>
+                            If we move the taller wall, the width decreases,
+                            but the shorter wall is still the same.
+                        </p>
+
+                        <p>
+                            So, move the shorter wall. We might find a taller wall
+                            and get a bigger area.
+                        </p>
+
+                        <pre>
+if (height[left] < height[right]) {
+    left++;
+} else {
+    right--;
+}</pre>
+
+
+                        <h3>🔍 5. Simple Dry Run</h3>
+
+                        <pre>
+Input: [1, 8, 6, 2, 5, 4, 8, 3, 7]
+
+Step 1:
+left = 0, right = 8
+Area = 8 × min(1, 7) = 8
+Move left.
+
+Step 2:
+left = 1, right = 8
+Area = 7 × min(8, 7) = 49
+Move right.
+
+Step 3:
+left = 1, right = 7
+Area = 6 × min(8, 3) = 18
+Move right.
+
+Step 4:
+left = 1, right = 6
+Area = 5 × min(8, 8) = 40
+Move either pointer.</pre>
+
+                        <p>
+                            Continue until both pointers meet.
+                        </p>
+
+                        <pre>
+Maximum Area = 49</pre>
+
+
+                        <h3>⚡ 6. Complexity</h3>
+
+                        <pre>
+Time Complexity: O(n)
+
+Space Complexity: O(1)</pre>
+
+
+                        <h3>💡 7. Remember</h3>
+
+                        <pre>
+1. Start pointers at both ends.
+2. Calculate the area.
+3. Update maximum area.
+4. Move the smaller height pointer.
+5. Repeat until pointers meet.</pre>
+
+                        <p>
+                            <strong>Key Point:</strong>
+                            Always move the shorter wall because it limits
+                            the amount of water the container can hold.
+                        </p>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
 
         </section>
 
@@ -660,6 +864,18 @@ Output = 7 units
                     rel="noopener noreferrer" class="reference-card">
                     <div>
                         <h3>Trapping Rain Water: leetcode</h3>
+                    </div>
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+            <div class="reference-list">
+
+                <a href="https://leetcode.com/problems/container-with-most-water/description/" target="_blank"
+                    rel="noopener noreferrer" class="reference-card">
+                    <div>
+                        <h3>Container With Most Water</h3>
                     </div>
                     <span>↗</span>
                 </a>
